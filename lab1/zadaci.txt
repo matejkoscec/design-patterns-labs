@@ -1,0 +1,95 @@
+------------------------------
+4. Zadatak
+------------------------------
+
+1. Pronađite dijelove assemblerskog kôda u kojima se odvija alociranje memorije za objekte poc i *pb.
+poc:
+sub	rsp, 40
+
+*pb:
+mov	edi, 16
+call	_Znwm@PLT   // -> `operator new`
+
+2. Objasnite razliku u načinu alociranja tih objekata.
+Stack vs heap.
+
+3. Pronađite dio assemblerskog kôda koji je zadužen za poziv konstruktora objekta poc, ako takav poziv postoji.
+Trivijalan konstruktor, nema eksplicitnog poziva u ovom asemblerskom kodu.
+
+4. Pronađite dio assemblerskog kôda koji je zadužen za poziv konstruktora objekta *pb. Razmotrite kako se točno izvršava
+   taj kôd. Što se u njemu događa?
+mov	edi, 16
+call	_Znwm@PLT
+mov	rbx, rax
+mov	rdi, rbx
+call	_ZN9CoolClassC1Ev   // -> poziv konstruktora CoolClass::CoolClass()
+
+5. Promotrite kako je prevoditelj izveo pozive pb->set i poc.set. Objasnite razliku između izvedbi tih dvaju poziva.
+   Koji od ta dva poziva zahtijeva manje instrukcija? Za koju od te dvije izvedbe bi optimirajući prevoditelj mogao
+   generirati kôd bez instrukcije CALL odnosno izravno umetnuti implementaciju funkcije (eng. inlining)?
+
+pb->set:
+mov	rax, QWORD PTR -32[rbp] // zapravo = rbp-32 -> neki offset do objekta koji je kompajler odredio
+mov	rax, QWORD PTR [rax]
+mov	rdx, QWORD PTR [rax]
+mov	rax, QWORD PTR -32[rbp]
+mov	esi, 42
+mov	rdi, rax
+call	rdx
+
+poc.set:
+lea	rax, -36[rbp]
+mov	esi, 42
+mov	rdi, rax
+call	_ZN13PlainOldClass3setEi    // -> PlainOldClass::set(int)
+
+`poc.set` ima manje instrukcija jer je objekt klase koja nije polimorfna (poziv metode je direktan jer se ne mora
+prolaziti kroz virtualnu tablicu metoda).
+Prevoditelj bi mogao izravno umetnuti implementaciju funkcije `poc.set` jer nije virtualna i njena implementacija je
+poznata za vrijeme prevođenja.
+
+6. Pronađite asemblerski kôd za definiciju i inicijalizaciju tablice virtualnih funkcija razreda CoolClass.
+
+.weak	_ZTV9CoolClass      // .weak - ako je simbol definiran više od jednom, linker se nece žaliti
+.section	.data.rel.ro.local._ZTV9CoolClass,"awG",@progbits,_ZTV9CoolClass,comdat
+.align 8        // pokazivači su 8 bajtova (64-bitni sustav)
+.type	_ZTV9CoolClass, @object
+.size	_ZTV9CoolClass, 32
+_ZTV9CoolClass: // inicijalizacija virtualne tablice
+	.quad	0
+	.quad	_ZTI9CoolClass
+	.quad	_ZN9CoolClass3setEi
+	.quad	_ZN9CoolClass3getEv
+
+
+
+
+------------------------------
+6. Zadatak
+------------------------------
+
+_ZN7DerivedC2Ev:
+.LFB6:
+	.cfi_startproc
+	endbr64
+	push	rbp
+	.cfi_def_cfa_offset 16
+	.cfi_offset 6, -16
+	mov	rbp, rsp
+	.cfi_def_cfa_register 6
+	sub	rsp, 16
+	mov	QWORD PTR -8[rbp], rdi
+	mov	rax, QWORD PTR -8[rbp]
+	mov	rdi, rax
+	call	_ZN4BaseC2Ev            // -> poziv Base::Base()
+	lea	rdx, _ZTV7Derived[rip+16]   // -> pomak na vtable klase Derived
+	mov	rax, QWORD PTR -8[rbp]
+	mov	QWORD PTR [rax], rdx
+	mov	rax, QWORD PTR -8[rbp]
+	mov	rdi, rax
+	call	_ZN4Base6metodaEv       // -> poziv metoda() nakon cega se poziva `virtualnaMetoda()` klase Derived jer
+	nop                             // je pokazivac na vtable postavljen na nju
+	leave
+	.cfi_def_cfa 7, 8
+	ret
+	.cfi_endproc

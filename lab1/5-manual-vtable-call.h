@@ -1,0 +1,6 @@
+#ifndef LAB1_5_MANUAL_VTABLE_CALL_H
+#define LAB1_5_MANUAL_VTABLE_CALL_H
+
+void task5();
+
+#endif //LAB1_5_MANUAL_VTABLE_CALL_H

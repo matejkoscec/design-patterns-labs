@@ -1,0 +1,6 @@
+# ninja log v5
+5	234	7348369346836229	CMakeFiles/tasks0_2.dir/main.cpp.obj	f89033cbcd5f17d9
+10	386	7345365211751662	CMakeFiles/tasks0_2.dir/task2.cpp.obj	5196bdde67799b2c
+1294	1658	7348372049946611	tasks0_2.exe	ab823ac0bc1947db
+9	91	7345361910832327	CMakeFiles/tasks0_2.dir/task1.c.obj	6f1d5885c31508cb
+4	1293	7348372046335212	CMakeFiles/tasks0_2.dir/task0.cpp.obj	267205ed47f67cb6

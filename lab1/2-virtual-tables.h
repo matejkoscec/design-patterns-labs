@@ -1,0 +1,6 @@
+#ifndef LAB1_2_VIRTUAL_TABLES_H
+#define LAB1_2_VIRTUAL_TABLES_H
+
+void task2();
+
+#endif //LAB1_2_VIRTUAL_TABLES_H

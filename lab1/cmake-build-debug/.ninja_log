@@ -1,0 +1,24 @@
+# ninja log v5
+2	372	7316965524170181	CMakeFiles/lab1.dir/1-dynamic-polymorphism.c.obj	c1810c0e9de293f6
+6	212	7329389567866714	CMakeFiles/lab1.dir/5-manual-vtable-call.cpp.obj	976c49457b2bcb61
+2	71	7333369315226945	CMakeFiles/lab1.dir/main.cpp.obj	610d26259e38333b
+8	74	7317101648326527	CMakeFiles/lab1.dir/2-virtual-tables.cpp.obj	7c5f6eaf7937c467
+71	152	7333369316004065	lab1.exe	17e3e0bf1d375a9
+1	351	7321393538553268	CMakeFiles/lab1.dir/2c-virtual-tables.c.obj	1ffbdfff5a73bc84
+7	224	7321395394759736	CMakeFiles/lab1.dir/3-memory-price.cpp.obj	5563f73c01c34223
+7	175	7329370514100651	CMakeFiles/lab1.dir/4-time-price.cpp.obj	358be4c827255781
+7	62	7329385112593279	CMakeFiles/lab1.dir/6-polimorphism-while-constructing.cpp.obj	8f68fa3c6e43dcd8
+176	547	7353440044000574	CMakeFiles/lab1.dir/6-polimorphism-while-constructing.cpp.obj	8f68fa3c6e43dcd8
+12	548	7353440044000574	CMakeFiles/lab1.dir/main.cpp.obj	610d26259e38333b
+151	549	7353440044000574	CMakeFiles/lab1.dir/2-virtual-tables.cpp.obj	7c5f6eaf7937c467
+91	549	7353440044000574	CMakeFiles/lab1.dir/1-dynamic-polymorphism.c.obj	c1810c0e9de293f6
+156	549	7353440044000574	CMakeFiles/lab1.dir/2c-virtual-tables.c.obj	1ffbdfff5a73bc84
+167	549	7353440044000574	CMakeFiles/lab1.dir/4-time-price.cpp.obj	358be4c827255781
+172	560	7353440044133673	CMakeFiles/lab1.dir/5-manual-vtable-call.cpp.obj	976c49457b2bcb61
+162	561	7353440044133673	CMakeFiles/lab1.dir/3-memory-price.cpp.obj	5563f73c01c34223
+561	911	7353440047593766	lab1.exe	83c079c4eb8731cf
+6	235	7353444500201684	CMakeFiles/lab1.dir/3-memory-price.cpp.obj	5563f73c01c34223
+235	328	7353444501095892	lab1.exe	83c079c4eb8731cf
+6	298	7353470010030829	CMakeFiles/lab1.dir/main.cpp.obj	610d26259e38333b
+68	406	7353470011106694	CMakeFiles/lab1.dir/6-polimorphism-while-constructing.cpp.obj	8f68fa3c6e43dcd8
+406	792	7353470014923076	lab1.exe	83c079c4eb8731cf

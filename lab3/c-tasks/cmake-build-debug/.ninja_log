@@ -1,0 +1,13 @@
+# ninja log v5
+2	222	7368151693487179	CMakeFiles/c_tasks.dir/main.cpp.obj	c93c28b31764e8a4
+11	225	7368151693523104	CMakeFiles/c_tasks.dir/task1.1.c.obj	3f1edfbf1c805e18
+225	651	7368151697750073	c_tasks.exe	f00dc2c4f0005dff
+3	389	7368706680785222	CMakeFiles/c_tasks.dir/main.cpp.obj	c93c28b31764e8a4
+74	390	7368706680785222	CMakeFiles/c_tasks.dir/task1_3.cpp.obj	cf02932d6ec865b3
+77	390	7368706680785222	CMakeFiles/c_tasks.dir/myfactory.c.obj	e4970aba18e1afea
+39	478	7368706681681280	CMakeFiles/c_tasks.dir/task1.1.c.obj	3f1edfbf1c805e18
+478	785	7368706684726070	c_tasks.exe	e8f0c299315c6fc8
+2	234	7368711744426316	CMakeFiles/c_tasks.dir/myfactory.c.obj	e4970aba18e1afea
+234	449	7368711746544479	c_tasks.exe	e8f0c299315c6fc8
+3	54	7368711964833452	CMakeFiles/c_tasks.dir/myfactory.c.obj	e4970aba18e1afea
+55	121	7368711965467689	c_tasks.exe	e8f0c299315c6fc8

@@ -1,0 +1,3 @@
+C:/FER/diplomski/2_semestar/oblikovni-obrasci-u-programiranju/lab/lab2/tasks0-2/cmake-build-debug/CMakeFiles/tasks0_2.dir
+C:/FER/diplomski/2_semestar/oblikovni-obrasci-u-programiranju/lab/lab2/tasks0-2/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/FER/diplomski/2_semestar/oblikovni-obrasci-u-programiranju/lab/lab2/tasks0-2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
