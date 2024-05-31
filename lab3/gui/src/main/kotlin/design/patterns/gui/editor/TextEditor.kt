@@ -1,13 +1,8 @@
 package design.patterns.gui.editor
 
 import design.patterns.gui.action
-import java.awt.Color
-import java.awt.Font
-import java.awt.Graphics
-import java.awt.event.InputEvent
-import java.awt.event.KeyAdapter
-import java.awt.event.KeyEvent
-import java.security.Key
+import java.awt.*
+import java.awt.event.*
 import javax.swing.JComponent
 import javax.swing.KeyStroke
 
@@ -17,32 +12,48 @@ class TextEditor : JComponent() {
     private val lineHeight = 1.2
     private val font = Font("Monospaced", Font.PLAIN, fontSize)
 
-    private var startSelection = false
+    private val padding = 40
 
-    private val textEditorModel = TextEditorModel("line\nsledeca lajna brate\nnext next line\n")
+    var startSelection = false
+        set(value) {
+            field = value
+            textEditorModel.selectionRange.from = textEditorModel.cursorLocation.copy()
+            textEditorModel.selectionRange.to = textEditorModel.cursorLocation.copy()
+            textEditorModel.notifySelectionRangeObservers()
+        }
 
-    private val clipboard = ClipboardStack()
-    private val undoManager = UndoManager.getInstance()
+    val textEditorModel = TextEditorModel("line\nsledeca lajna brate\nnext next line\n")
+
+    val clipboard = ClipboardStack()
+    val undoManager = UndoManager.getInstance()
 
     init {
+        layout = BorderLayout()
+
+        val cursor = Cursor(textEditorModel, font, lineHeight, padding)
+        add(cursor)
+
+        addMouseListener(object : MouseAdapter() {
+            override fun mouseClicked(e: MouseEvent) {
+                requestFocus()
+            }
+        })
+
         textEditorModel.addCursorObserver {
             repaint()
         }
         textEditorModel.addTextObserver {
             repaint()
         }
-        clipboard.addObserver {
-            println(clipboard)
-        }
 
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0), "cursor.move.left")
         actionMap.put("cursor.move.left", action {
             if (startSelection) {
-                startSelection = false
                 val from = textEditorModel.selectionRange.from
                 val to = textEditorModel.selectionRange.to
                 textEditorModel.cursorLocation = if (from <= to) from.copy() else to.copy()
                 textEditorModel.notifyCursorObservers()
+                startSelection = false
             } else {
                 textEditorModel.moveCursorLeft()
             }
@@ -50,11 +61,11 @@ class TextEditor : JComponent() {
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0), "cursor.move.right")
         actionMap.put("cursor.move.right", action {
             if (startSelection) {
-                startSelection = false
                 val from = textEditorModel.selectionRange.from
                 val to = textEditorModel.selectionRange.to
                 textEditorModel.cursorLocation = if (from > to) from.copy() else to.copy()
                 textEditorModel.notifyCursorObservers()
+                startSelection = false
             } else {
                 textEditorModel.moveCursorRight()
             }
@@ -92,6 +103,7 @@ class TextEditor : JComponent() {
             }
             textEditorModel.moveCursorLeft()
             textEditorModel.selectionRange.to = textEditorModel.cursorLocation.copy()
+            textEditorModel.notifySelectionRangeObservers()
         })
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, InputEvent.SHIFT_DOWN_MASK), "cursor.move.right_shift")
         actionMap.put("cursor.move.right_shift", action {
@@ -100,9 +112,11 @@ class TextEditor : JComponent() {
                 textEditorModel.selectionRange.from = textEditorModel.cursorLocation.copy()
                 textEditorModel.moveCursorRight()
                 textEditorModel.selectionRange.to = textEditorModel.cursorLocation.copy()
+                textEditorModel.notifySelectionRangeObservers()
             } else {
                 textEditorModel.moveCursorRight()
                 textEditorModel.selectionRange.to = textEditorModel.cursorLocation.copy()
+                textEditorModel.notifySelectionRangeObservers()
             }
         })
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_UP, InputEvent.SHIFT_DOWN_MASK), "cursor.move.up_shift")
@@ -112,9 +126,11 @@ class TextEditor : JComponent() {
                 textEditorModel.selectionRange.from = textEditorModel.cursorLocation.copy()
                 textEditorModel.moveCursorUp()
                 textEditorModel.selectionRange.to = textEditorModel.cursorLocation.copy()
+                textEditorModel.notifySelectionRangeObservers()
             } else {
                 textEditorModel.moveCursorUp()
                 textEditorModel.selectionRange.to = textEditorModel.cursorLocation.copy()
+                textEditorModel.notifySelectionRangeObservers()
             }
         })
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, InputEvent.SHIFT_DOWN_MASK), "cursor.move.down_shift")
@@ -124,9 +140,11 @@ class TextEditor : JComponent() {
                 textEditorModel.selectionRange.from = textEditorModel.cursorLocation.copy()
                 textEditorModel.moveCursorDown()
                 textEditorModel.selectionRange.to = textEditorModel.cursorLocation.copy()
+                textEditorModel.notifySelectionRangeObservers()
             } else {
                 textEditorModel.moveCursorDown()
                 textEditorModel.selectionRange.to = textEditorModel.cursorLocation.copy()
+                textEditorModel.notifySelectionRangeObservers()
             }
         })
 
@@ -190,100 +208,16 @@ class TextEditor : JComponent() {
                 }
                 if (e.isControlDown && !e.isShiftDown) {
                     when (e.keyCode) {
-                        KeyEvent.VK_C -> {
-                            if (!startSelection) {
-                                return
-                            }
-                            val from = textEditorModel.selectionRange.from
-                            val to = textEditorModel.selectionRange.to
-                            val left = if (from <= to) from else to
-                            val right = if (from > to) from else to
-                            if (left.row == right.row) {
-                                clipboard.push(textEditorModel.currentLine.substring(left.col..<right.col))
-                                return
-                            }
-
-                            val text = StringBuilder()
-                            for ((row, line) in textEditorModel.text.withIndex()) {
-                                if (row !in left.row..right.row) {
-                                    continue
-                                }
-                                when (row) {
-                                    left.row -> text.appendLine(line.substring(left.col..<line.length))
-                                    right.row -> text.append(line.substring(0..<right.col))
-                                    else -> text.appendLine(line)
-                                }
-                            }
-
-                            clipboard.push(text.toString())
-                            return
-                        }
-
-                        KeyEvent.VK_X -> {
-                            if (!startSelection) {
-                                return
-                            }
-                            val from = textEditorModel.selectionRange.from
-                            val to = textEditorModel.selectionRange.to
-                            val left = if (from <= to) from else to
-                            val right = if (from > to) from else to
-                            if (left.row == right.row) {
-                                clipboard.push(textEditorModel.currentLine.substring(left.col..<right.col))
-                                val command = DeleteRangeCommand(textEditorModel)
-                                command.executeDo()
-                                undoManager.push(command)
-                                startSelection = false
-                                return
-                            }
-
-                            val text = StringBuilder()
-                            for ((row, line) in textEditorModel.text.withIndex()) {
-                                if (row !in left.row..right.row) {
-                                    continue
-                                }
-                                when (row) {
-                                    left.row -> text.appendLine(line.substring(left.col..<line.length))
-                                    right.row -> text.append(line.substring(0..<right.col))
-                                    else -> text.appendLine(line)
-                                }
-                            }
-
-                            clipboard.push(text.toString())
-                            val command = DeleteRangeCommand(textEditorModel)
-                            command.executeDo()
-                            undoManager.push(command)
-                            startSelection = false
-                            return
-                        }
-
-                        KeyEvent.VK_V -> {
-                            if (clipboard.isEmpty()) {
-                                return
-                            }
-
-                            val command = InsertTextCommand(textEditorModel, clipboard.peek())
-                            command.executeDo()
-                            undoManager.push(command)
-                            return
-                        }
-
-                        KeyEvent.VK_Z -> {
-                            undoManager.undo()
-                            return
-                        }
-
-                        KeyEvent.VK_Y -> {
-                            undoManager.redo()
-                            return
-                        }
+                        KeyEvent.VK_C -> CopyCommand().executeDo()
+                        KeyEvent.VK_X -> CutCommand().executeDo()
+                        KeyEvent.VK_V -> PasteCommand().executeDo()
+                        KeyEvent.VK_Z -> undoManager.undo()
+                        KeyEvent.VK_Y -> undoManager.redo()
                     }
+                    return
                 }
                 if (e.isControlDown && e.isShiftDown && e.keyCode == KeyEvent.VK_V) {
-                    if (clipboard.isEmpty()) {
-                        return
-                    }
-
-                    textEditorModel.insert(clipboard.pop())
+                    PasteCommand(take = true).executeDo()
                     return
                 }
                 if (e.isActionKey) {
@@ -292,6 +226,7 @@ class TextEditor : JComponent() {
                             textEditorModel.moveCursorHome()
                             startSelection = false
                         }
+
                         KeyEvent.VK_END -> {
                             textEditorModel.moveCursorEnd()
                             startSelection = false
@@ -331,26 +266,23 @@ class TextEditor : JComponent() {
     override fun paintComponent(g: Graphics) {
         super.paintComponent(g)
 
+        g as Graphics2D
+
         g.font = font
         val fontMetrics = g.getFontMetrics(font)
         for ((i, line) in textEditorModel.text.withIndex()) {
-            g.drawString(line, 0, (i + 1) * (fontSize * lineHeight).toInt())
-            if (i == textEditorModel.cursorLocation.row) {
-                val color = g.color
-                g.color = Color.RED
+            g.composite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f)
 
-                val col = textEditorModel.cursorLocation.col
-                val sw = fontMetrics.stringWidth(line.substring(0..<col))
-
-                g.drawLine(
-                    sw,
-                    i * (fontSize * lineHeight).toInt(),
-                    sw,
-                    (i + 1) * (fontSize * lineHeight).toInt()
-                )
-
-                g.color = color
-            }
+            val digitWidth = fontMetrics.stringWidth((i % 10).toString())
+            val numberWidth = fontMetrics.stringWidth(i.toString())
+            g.drawString(i.toString(), padding - (numberWidth + digitWidth), (i + 1) * (fontSize * lineHeight).toInt())
+            g.drawLine(
+                padding - 5,
+                i * (fontSize * lineHeight).toInt(),
+                padding - 5,
+                (i + 1) * (fontSize * lineHeight).toInt()
+            )
+            g.drawString(line, padding, (i + 1) * (fontSize * lineHeight).toInt())
 
             if (!startSelection) {
                 continue
@@ -365,9 +297,13 @@ class TextEditor : JComponent() {
                 continue
             }
 
+            val alpha = 0.4f
+            val composite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha)
+            g.composite = composite
+
             if (from.row == to.row) {
-                g.drawRect(
-                    fontMetrics.stringWidth(line.substring(0..<from.col)),
+                g.fillRect(
+                    padding + fontMetrics.stringWidth(line.substring(0..<from.col)),
                     i * (fontSize * lineHeight).toInt(),
                     fontMetrics.stringWidth(line.substring(from.col..<to.col)),
                     (fontSize * lineHeight).toInt()
@@ -377,8 +313,8 @@ class TextEditor : JComponent() {
 
             when (i) {
                 from.row -> {
-                    g.drawRect(
-                        fontMetrics.stringWidth(line.substring(0..<from.col)),
+                    g.fillRect(
+                        padding + fontMetrics.stringWidth(line.substring(0..<from.col)),
                         i * (fontSize * lineHeight).toInt(),
                         fontMetrics.stringWidth(line.substring(from.col..<line.length)),
                         (fontSize * lineHeight).toInt()
@@ -386,8 +322,8 @@ class TextEditor : JComponent() {
                 }
 
                 to.row -> {
-                    g.drawRect(
-                        0,
+                    g.fillRect(
+                        padding,
                         i * (fontSize * lineHeight).toInt(),
                         fontMetrics.stringWidth(line.substring(0..<to.col)),
                         (fontSize * lineHeight).toInt()
@@ -395,8 +331,8 @@ class TextEditor : JComponent() {
                 }
 
                 else -> {
-                    g.drawRect(
-                        0,
+                    g.fillRect(
+                        padding,
                         i * (fontSize * lineHeight).toInt(),
                         fontMetrics.stringWidth(line),
                         (fontSize * lineHeight).toInt()
@@ -404,5 +340,109 @@ class TextEditor : JComponent() {
                 }
             }
         }
+    }
+
+    inner class CopyCommand : EditAction {
+
+        override fun executeDo() {
+            if (!startSelection) {
+                return
+            }
+            val from = textEditorModel.selectionRange.from
+            val to = textEditorModel.selectionRange.to
+            val left = if (from <= to) from else to
+            val right = if (from > to) from else to
+            if (left.row == right.row) {
+                clipboard.push(textEditorModel.currentLine.substring(left.col..<right.col))
+                return
+            }
+
+            val text = StringBuilder()
+            for ((row, line) in textEditorModel.text.withIndex()) {
+                if (row !in left.row..right.row) {
+                    continue
+                }
+                when (row) {
+                    left.row -> text.appendLine(line.substring(left.col..<line.length))
+                    right.row -> text.append(line.substring(0..<right.col))
+                    else -> text.appendLine(line)
+                }
+            }
+
+            clipboard.push(text.toString())
+        }
+
+        override fun executeUndo(): Nothing = throw UnsupportedOperationException()
+    }
+
+    inner class CutCommand : EditAction {
+
+        private lateinit var command: DeleteRangeCommand
+
+        override fun executeDo() {
+            if (!startSelection) {
+                return
+            }
+            val from = textEditorModel.selectionRange.from
+            val to = textEditorModel.selectionRange.to
+            val left = if (from <= to) from else to
+            val right = if (from > to) from else to
+            if (left.row == right.row) {
+                clipboard.push(textEditorModel.currentLine.substring(left.col..<right.col))
+                command = DeleteRangeCommand(textEditorModel)
+                command.executeDo()
+                undoManager.push(command)
+                startSelection = false
+                return
+            }
+
+            val text = StringBuilder()
+            for ((row, line) in textEditorModel.text.withIndex()) {
+                if (row !in left.row..right.row) {
+                    continue
+                }
+                when (row) {
+                    left.row -> text.appendLine(line.substring(left.col..<line.length))
+                    right.row -> text.append(line.substring(0..<right.col))
+                    else -> text.appendLine(line)
+                }
+            }
+
+            clipboard.push(text.toString())
+            command = DeleteRangeCommand(textEditorModel)
+            command.executeDo()
+            undoManager.push(command)
+            startSelection = false
+        }
+
+        override fun executeUndo() = command.executeUndo()
+    }
+
+    inner class PasteCommand(private val take: Boolean = false) : EditAction {
+
+        private lateinit var command: EditAction
+
+        override fun executeDo() {
+            if (clipboard.isEmpty()) {
+                return
+            }
+
+            val text = if (take) clipboard.pop() else clipboard.peek()
+
+            if (startSelection) {
+                command = DeleteRangeCommand(textEditorModel)
+                command.executeDo()
+                InsertTextCommand(textEditorModel, text).executeDo()
+                startSelection = false
+                undoManager.push(command)
+                return
+            }
+
+            command = InsertTextCommand(textEditorModel, text)
+            command.executeDo()
+            undoManager.push(command)
+        }
+
+        override fun executeUndo() = command.executeUndo()
     }
 }

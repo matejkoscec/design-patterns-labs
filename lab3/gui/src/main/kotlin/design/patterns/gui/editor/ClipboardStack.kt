@@ -1,5 +1,9 @@
 package design.patterns.gui.editor
 
+fun interface ClipboardObserver {
+    fun updateClipboard(clipboard: List<String>)
+}
+
 class ClipboardStack {
 
     private val texts = ArrayDeque<String>()
@@ -8,7 +12,7 @@ class ClipboardStack {
 
     fun addObserver(observer: ClipboardObserver) = observers.add(observer)
     fun removeObserver(observer: ClipboardObserver) = observers.remove(observer)
-    fun notifyObservers() = observers.forEach(ClipboardObserver::updateClipboard)
+    fun notifyObservers() = observers.forEach { it.updateClipboard(texts) }
 
     fun push(string: String) {
         texts.addLast(string)
@@ -30,9 +34,5 @@ class ClipboardStack {
         notifyObservers()
     }
 
-    override fun toString(): String = "ClipboardStack(texts=$texts)"
-}
-
-fun interface ClipboardObserver {
-    fun updateClipboard()
+    override fun toString(): String = "Clipboard($texts)"
 }

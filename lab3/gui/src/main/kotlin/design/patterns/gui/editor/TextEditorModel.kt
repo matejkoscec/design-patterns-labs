@@ -2,11 +2,14 @@ package design.patterns.gui.editor
 
 import design.patterns.gui.Location
 import design.patterns.gui.LocationRange
-import kotlin.math.min
 
 
 fun interface CursorObserver {
     fun updateCursorLocation(loc: Location)
+}
+
+fun interface SelectionRangeObserver {
+    fun updateSelectionRange(range: LocationRange)
 }
 
 fun interface TextObserver {
@@ -28,6 +31,7 @@ class TextEditorModel(text: String) {
     var selectionRange = LocationRange(Location(0, 0), Location(0, 0))
 
     private val cursorObservers = mutableSetOf<CursorObserver>()
+    private val selectionRangeObservers = mutableSetOf<SelectionRangeObserver>()
     private val textObservers = mutableSetOf<TextObserver>()
 
     fun allLines(): Iterator<StringBuilder> = lines.iterator()
@@ -36,6 +40,10 @@ class TextEditorModel(text: String) {
     fun addCursorObserver(observer: CursorObserver) = cursorObservers.add(observer)
     fun removeCursorObserver(observer: CursorObserver) = cursorObservers.remove(observer)
     fun notifyCursorObservers() = cursorObservers.forEach { it.updateCursorLocation(cursorLocation) }
+
+    fun addSelectionRangeObserver(observer: SelectionRangeObserver) = selectionRangeObservers.add(observer)
+    fun removeSelectionRangeObserver(observer: SelectionRangeObserver) = selectionRangeObservers.remove(observer)
+    fun notifySelectionRangeObservers() = selectionRangeObservers.forEach { it.updateSelectionRange(selectionRange) }
 
     fun addTextObserver(observer: TextObserver) = textObservers.add(observer)
     fun removeTextObserver(observer: TextObserver) = textObservers.remove(observer)
@@ -122,11 +130,13 @@ class TextEditorModel(text: String) {
     fun moveCursorToStart() {
         cursorLocation.row = 0
         cursorLocation.col = 0
+        notifyCursorObservers()
     }
 
     fun moveCursorToEnd() {
         cursorLocation.row = lines.size - 1
         cursorLocation.col = lines.last().length
+        notifyCursorObservers()
     }
 
     fun deleteBefore() {
@@ -219,6 +229,7 @@ class TextEditorModel(text: String) {
         val newLines = text.split('\n')
         if (newLines.size == 1) {
             currentLine.insert(cursorLocation.col, newLines.first())
+            cursorLocation.col += newLines.first().length
             notifyTextObservers()
             return
         }
@@ -241,6 +252,13 @@ class TextEditorModel(text: String) {
             }
         }
 
+        notifyTextObservers()
+    }
+
+    fun clear() {
+        moveCursorToStart()
+        lines.clear()
+        lines.add(StringBuilder())
         notifyTextObservers()
     }
 }
@@ -329,21 +347,51 @@ class DeleteRangeCommand(private val model: TextEditorModel) : EditAction {
     private val from = if (range.from <= range.to) range.from.copy() else range.to.copy()
     private val to = if (range.from > range.to) range.from.copy() else range.to.copy()
 
-    private val lines: List<String> = model.lines.subList(from.row, to.row + 1).map { it.toString() }
+    private val text = mutableListOf<StringBuilder>()
 
     override fun executeDo() {
         model.cursorLocation = from.copy()
+
+        if (from.row == to.row) {
+            text.add(StringBuilder(model.currentLine.substring(from.col..<to.col)))
+            model.deleteRange(range)
+            return
+        }
+
+        for (row in from.row..to.row) when (row) {
+            from.row -> text.add(StringBuilder(model.lines[row].substring(from.col..<model.lines[row].length)))
+            to.row -> text.add(StringBuilder(model.lines[row].substring(0..<to.col)))
+            else -> text.add(StringBuilder(model.lines[row]))
+        }
         model.deleteRange(range)
+        println(text)
     }
 
     override fun executeUndo() {
-        model.cursorLocation = from.copy()
+        model.cursorLocation = to.copy()
 
-        model.lines.removeAt(from.row)
-        for ((i, row) in (from.row..to.row).withIndex()) {
-            model.lines.add(min(row, model.lines.size), StringBuilder(lines[i]))
+        if (from.row == to.row) {
+            model.lines[from.row].insert(from.col, text[0])
+            model.notifyTextObservers()
+            return
         }
 
+        var movedString = ""
+        for ((i, row) in (from.row..to.row).withIndex()) when (row) {
+            from.row -> {
+                movedString = model.lines[from.row].substring(from.col..<model.lines[from.row].length)
+                model.lines[from.row].deleteRange(from.col, model.lines[from.row].length)
+                model.lines[from.row].append(text[i])
+            }
+
+            to.row -> {
+                model.lines.add(from.row + i, text[i].append(movedString))
+            }
+
+            else -> {
+                model.lines.add(from.row + i, text[i])
+            }
+        }
         model.notifyTextObservers()
     }
 }

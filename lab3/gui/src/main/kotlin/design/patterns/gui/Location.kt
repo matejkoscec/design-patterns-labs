@@ -1,6 +1,5 @@
 package design.patterns.gui
 
-import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
 
@@ -37,8 +36,7 @@ data class Location(var row: Int, var col: Int) : Comparable<Location> {
     }
 }
 
-operator fun Location.minus(other: Location): Location {
-    return Location(abs(row - other.row), abs(col - other.col))
+data class LocationRange(var from: Location, var to: Location) {
+    fun isEmpty(): Boolean = from == to
+    fun isNotEmpty(): Boolean = !isEmpty()
 }
-
-data class LocationRange(var from: Location, var to: Location)

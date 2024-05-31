@@ -3,9 +3,9 @@
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
-  <component name="CMakePresetLoader"><![CDATA[{
-  "useNewFormat": true
-}]]></component>
+  <component name="CMakePresetLoader">{
+  &quot;useNewFormat&quot;: true
+}</component>
   <component name="CMakeReloadState">
     <option name="reloaded" value="true" />
   </component>
@@ -20,7 +20,90 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="191dfd40-339e-41ea-a697-aa46c2dcb7c9" name="Changes" comment="" />
+    <list default="true" id="191dfd40-339e-41ea-a697-aa46c2dcb7c9" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/parrot.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/parrot.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tiger.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tiger.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gui/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gui/src/main/kotlin/design/patterns/gui/Menu.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gui/src/main/kotlin/design/patterns/gui/Plugin.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gui/src/main/kotlin/design/patterns/gui/StatusBar.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gui/src/main/kotlin/design/patterns/gui/Toolbar.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gui/src/main/kotlin/design/patterns/gui/editor/Cursor.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gui/src/main/kotlin/design/patterns/gui/plugins/CapitalizePlugin.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gui/src/main/kotlin/design/patterns/gui/plugins/StatisticsPlugin.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../parser/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../parser/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../parser/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../parser/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../parser/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../parser/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../parser/gradlew" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../parser/gradlew.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../parser/src/main/kotlin/design/patterns/composite/Main.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../parser/src/main/kotlin/design/patterns/composite/v1/Expression.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../parser/src/main/kotlin/design/patterns/composite/v1/Parser.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab4/vector-graphics-editor/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab4/vector-graphics-editor/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab4/vector-graphics-editor/.idea/kotlinc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab4/vector-graphics-editor/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab4/vector-graphics-editor/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab4/vector-graphics-editor/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab4/vector-graphics-editor/build.gradle.kts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab4/vector-graphics-editor/gradle.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab4/vector-graphics-editor/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab4/vector-graphics-editor/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab4/vector-graphics-editor/gradlew" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab4/vector-graphics-editor/gradlew.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab4/vector-graphics-editor/graphics.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab4/vector-graphics-editor/output.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab4/vector-graphics-editor/settings.gradle.kts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab4/vector-graphics-editor/src/main/kotlin/design/patterns/vector/graphics/editor/Extensions.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab4/vector-graphics-editor/src/main/kotlin/design/patterns/vector/graphics/editor/Main.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab4/vector-graphics-editor/src/main/kotlin/design/patterns/vector/graphics/editor/Renderer.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab4/vector-graphics-editor/src/main/kotlin/design/patterns/vector/graphics/editor/graphics/AbstractGraphicalObject.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab4/vector-graphics-editor/src/main/kotlin/design/patterns/vector/graphics/editor/graphics/CompositeShape.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab4/vector-graphics-editor/src/main/kotlin/design/patterns/vector/graphics/editor/graphics/DocumentModel.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab4/vector-graphics-editor/src/main/kotlin/design/patterns/vector/graphics/editor/graphics/DocumentModelListener.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab4/vector-graphics-editor/src/main/kotlin/design/patterns/vector/graphics/editor/graphics/G2DRendererImpl.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab4/vector-graphics-editor/src/main/kotlin/design/patterns/vector/graphics/editor/graphics/GraphicalObject.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab4/vector-graphics-editor/src/main/kotlin/design/patterns/vector/graphics/editor/graphics/GraphicalObjectListener.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab4/vector-graphics-editor/src/main/kotlin/design/patterns/vector/graphics/editor/graphics/LineSegment.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab4/vector-graphics-editor/src/main/kotlin/design/patterns/vector/graphics/editor/graphics/Oval.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab4/vector-graphics-editor/src/main/kotlin/design/patterns/vector/graphics/editor/graphics/Point.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab4/vector-graphics-editor/src/main/kotlin/design/patterns/vector/graphics/editor/graphics/Rectangle.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab4/vector-graphics-editor/src/main/kotlin/design/patterns/vector/graphics/editor/gui/Canvas.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab4/vector-graphics-editor/src/main/kotlin/design/patterns/vector/graphics/editor/gui/GUI.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab4/vector-graphics-editor/src/main/kotlin/design/patterns/vector/graphics/editor/gui/State.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab4/vector-graphics-editor/src/main/kotlin/design/patterns/vector/graphics/editor/gui/Toolbar.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab4/vector-graphics-editor/src/main/kotlin/design/patterns/vector/graphics/editor/svg/SVGRendererImpl.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab1/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/../../lab1/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-7aedb2222a80e706eee3.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/index-2024-05-07T20-56-52-0319.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-c_tasks-Debug-8916338c66b52af95d72.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/c_tasks.dir/main.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/c_tasks.dir/main.cpp.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/c_tasks.dir/myfactory.c.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/c_tasks.dir/myfactory.c.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-Debug-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-Debug-log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/build.ninja" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/build.ninja" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/c_tasks.exe" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/c_tasks.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myfactory.c" beforeDir="false" afterPath="$PROJECT_DIR$/myfactory.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task1_3.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/task1_3.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gui/src/main/kotlin/design/patterns/gui/Location.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../gui/src/main/kotlin/design/patterns/gui/Location.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gui/src/main/kotlin/design/patterns/gui/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../gui/src/main/kotlin/design/patterns/gui/Main.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gui/src/main/kotlin/design/patterns/gui/editor/ClipboardStack.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../gui/src/main/kotlin/design/patterns/gui/editor/ClipboardStack.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gui/src/main/kotlin/design/patterns/gui/editor/TextEditor.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../gui/src/main/kotlin/design/patterns/gui/editor/TextEditor.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gui/src/main/kotlin/design/patterns/gui/editor/TextEditorModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../gui/src/main/kotlin/design/patterns/gui/editor/TextEditorModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gui/src/main/kotlin/design/patterns/gui/editor/UndoManager.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../gui/src/main/kotlin/design/patterns/gui/editor/UndoManager.kt" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -30,45 +113,55 @@
     <option name="formatViaClangd" value="false" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
   <component name="ProjectApplicationVersion">
     <option name="ide" value="CLion" />
     <option name="majorVersion" value="2024" />
     <option name="minorVersion" value="1" />
     <option name="productBranch" value="Classic" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 2
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectId" id="2g9WA6LGdD7f2JQGLHQ8iUEYzE1" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "CMake Application.c_tasks.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "RunOnceActivity.readMode.enableVisualFormatting": "true",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "ignore.virus.scanning.warn.message": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.keymap",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;CMake Application.c_tasks.executor&quot;: &quot;Debug&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/FER/diplomski/2_semestar/oblikovni-obrasci-u-programiranju/lab/lab3/c-tasks/cmake-build-debug&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\FER\diplomski\2_semestar\oblikovni-obrasci-u-programiranju\lab\lab3\c-tasks\cmake-build-debug" />
+    </key>
+  </component>
   <component name="RunManager">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="c_tasks" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="c_tasks" TARGET_NAME="c_tasks" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="c_tasks" RUN_TARGET_NAME="c_tasks">
+    <configuration name="c_tasks" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="parrot marko" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="c_tasks" TARGET_NAME="c_tasks" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="c_tasks" RUN_TARGET_NAME="c_tasks">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -83,6 +176,9 @@
       <option name="presentableId" value="Default" />
       <updated>1715110126679</updated>
       <workItem from="1715110128849" duration="8416000" />
+      <workItem from="1716495709251" duration="2223000" />
+      <workItem from="1716498133403" duration="1365000" />
+      <workItem from="1716811641285" duration="47000" />
     </task>
     <servers />
   </component>
@@ -93,5 +189,8 @@
     <isAutomaticCheckingOnLaunch value="false" />
     <isAutomaticFoundErrors value="true" />
     <isAutomaticReloadCMake value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>

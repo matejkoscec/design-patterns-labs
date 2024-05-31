@@ -6,42 +6,31 @@ interface EditAction {
     fun executeUndo()
 }
 
-fun interface UndoStackObserver {
-    fun updateUndoStack()
+fun interface StackObserver {
+    fun updateStack()
 }
 
-fun interface RedoStackObserver {
-    fun updateRedoStack()
-}
-
-class UndoManager private constructor() : UndoStackObserver, RedoStackObserver {
+class UndoManager private constructor() : StackObserver {
 
     private val undoStack = ArrayDeque<EditAction>()
     private val redoStack = ArrayDeque<EditAction>()
 
-    private val undoStackObservers = mutableSetOf<UndoStackObserver>(this)
-    private val redoStackObservers = mutableSetOf<RedoStackObserver>(this)
+    private val stackObservers = mutableSetOf<StackObserver>(this)
 
-    fun addUndoStackObserver(observer: UndoStackObserver) = undoStackObservers.add(observer)
-    fun removeUndoStackObserver(observer: UndoStackObserver) = undoStackObservers.remove(observer)
-    private fun notifyUndoStackObservers() = undoStackObservers.forEach { it.updateUndoStack() }
-
-    fun addRedoStackObserver(observer: RedoStackObserver) = redoStackObservers.add(observer)
-    fun removeRedoStackObserver(observer: RedoStackObserver) = redoStackObservers.remove(observer)
-    private fun notifyRedoStackObservers() = redoStackObservers.forEach { it.updateRedoStack() }
+    fun addUndoStackObserver(observer: StackObserver) = stackObservers.add(observer)
+    fun removeUndoStackObserver(observer: StackObserver) = stackObservers.remove(observer)
+    private fun notifyUndoStackObservers() = stackObservers.forEach { it.updateStack() }
 
     fun undo() = undoStack.removeLastOrNull()?.let {
         it.executeUndo()
         redoStack.addLast(it)
         notifyUndoStackObservers()
-        notifyRedoStackObservers()
     }
 
     fun push(action: EditAction) {
         redoStack.clear()
         undoStack.addLast(action)
         notifyUndoStackObservers()
-        notifyRedoStackObservers()
     }
 
     fun redo() = redoStack.removeLastOrNull()?.let {
@@ -50,13 +39,10 @@ class UndoManager private constructor() : UndoStackObserver, RedoStackObserver {
         notifyUndoStackObservers()
     }
 
-    override fun updateUndoStack() {
+    override fun updateStack() {}
 
-    }
-
-    override fun updateRedoStack() {
-
-    }
+    fun isUndoStackEmpty() = undoStack.isEmpty()
+    fun isRedoStackEmpty() = redoStack.isEmpty()
 
     companion object StaticFields {
 

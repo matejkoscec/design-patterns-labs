@@ -61,12 +61,6 @@ build CMakeFiles/c_tasks.dir/task1.1.c.obj: C_COMPILER__c_tasks_unscanned_Debug 
   OBJECT_DIR = CMakeFiles\c_tasks.dir
   OBJECT_FILE_DIR = CMakeFiles\c_tasks.dir
 
-build CMakeFiles/c_tasks.dir/task1_3.cpp.obj: CXX_COMPILER__c_tasks_unscanned_Debug C$:/FER/diplomski/2_semestar/oblikovni-obrasci-u-programiranju/lab/lab3/c-tasks/task1_3.cpp || cmake_object_order_depends_target_c_tasks
-  DEP_FILE = CMakeFiles\c_tasks.dir\task1_3.cpp.obj.d
-  FLAGS = -g -fdiagnostics-color=always
-  OBJECT_DIR = CMakeFiles\c_tasks.dir
-  OBJECT_FILE_DIR = CMakeFiles\c_tasks.dir
-
 build CMakeFiles/c_tasks.dir/myfactory.c.obj: C_COMPILER__c_tasks_unscanned_Debug C$:/FER/diplomski/2_semestar/oblikovni-obrasci-u-programiranju/lab/lab3/c-tasks/myfactory.c || cmake_object_order_depends_target_c_tasks
   DEP_FILE = CMakeFiles\c_tasks.dir\myfactory.c.obj.d
   FLAGS = -g -fdiagnostics-color=always
@@ -81,7 +75,7 @@ build CMakeFiles/c_tasks.dir/myfactory.c.obj: C_COMPILER__c_tasks_unscanned_Debu
 #############################################
 # Link the executable c_tasks.exe
 
-build c_tasks.exe: CXX_EXECUTABLE_LINKER__c_tasks_Debug CMakeFiles/c_tasks.dir/main.cpp.obj CMakeFiles/c_tasks.dir/task1.1.c.obj CMakeFiles/c_tasks.dir/task1_3.cpp.obj CMakeFiles/c_tasks.dir/myfactory.c.obj
+build c_tasks.exe: CXX_EXECUTABLE_LINKER__c_tasks_Debug CMakeFiles/c_tasks.dir/main.cpp.obj CMakeFiles/c_tasks.dir/task1.1.c.obj CMakeFiles/c_tasks.dir/myfactory.c.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\c_tasks.dir

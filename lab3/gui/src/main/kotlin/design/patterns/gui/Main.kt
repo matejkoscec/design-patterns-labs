@@ -19,6 +19,11 @@ class EditorFrame : JFrame() {
         setLocationRelativeTo(null)
 //        pack()
 
-        add(TextEditor())
+        val textEditor = TextEditor()
+
+        jMenuBar = Menu(textEditor)
+        add(Toolbar(textEditor), BorderLayout.NORTH)
+        add(StatusBar(textEditor), BorderLayout.SOUTH)
+        add(textEditor)
     }
 }
